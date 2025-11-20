@@ -33,7 +33,7 @@
   };
 
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbxp3_eOKNNsHaQq4fBh2u-Ysu0uKYYKf8Lo69JBUq2YlYG8pDBWT_7ynt5CF5v1zEDUcA/exec", {
+    await fetch("https://script.google.com/macros/s/AKfycbw3oF9rr77LfzHIlBngAbM9473r1TrDxRVi_dNofnlm0wI3ppN0ioUv4TORAKTIqLy6Ng/exec", {
       method: "POST",
       mode: "no-cors", // evita pré-flight / problemas CORS
       headers: { "Content-Type": "application/json" },
@@ -69,7 +69,7 @@ function handleProdutos(produtos) {
   produtos.forEach(p => {
     container.innerHTML += `
       <div class="equipament-card">
-        <img src="${p.imagem}" alt="${p.nome}" style="width="100%" height="200px">
+        <img id="imagem-auto" src="${p.imagem}" alt="${p.nome}">
         <h3>${p.nome}</h3>
         <p>${p.categoria}</p>
         <a class="btn btn-primary" href="${p.link}" target="_blank">Acessar</a>
@@ -79,7 +79,7 @@ function handleProdutos(produtos) {
 }
 
 function carregarProdutos() {
-  const url = "https://script.google.com/macros/s/AKfycbxp3_eOKNNsHaQq4fBh2u-Ysu0uKYYKf8Lo69JBUq2YlYG8pDBWT_7ynt5CF5v1zEDUcA/exec"; // substitua com sua /exec
+  const url = "https://script.google.com/macros/s/AKfycbw3oF9rr77LfzHIlBngAbM9473r1TrDxRVi_dNofnlm0wI3ppN0ioUv4TORAKTIqLy6Ng/exec"; // substitua com sua /exec
   const script = document.createElement("script");
   script.src = url + "?callback=handleProdutos";
   script.onerror = function() {
