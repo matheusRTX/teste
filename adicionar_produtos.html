@@ -57,6 +57,7 @@
     <!-- fim no codigo para adicionar produtos na tabela -->
 
 
+    <!-- puxar produtos da planilha -->
 
 <div id="lista"></div>
 
@@ -67,11 +68,11 @@ function handleProdutos(produtos) {
 
   produtos.forEach(p => {
     container.innerHTML += `
-      <div class="produto">
-        <img src="${p.imagem}" alt="${p.nome}" style="max-width:200px;">
+      <div class="equipament-card">
+        <img src="${p.imagem}" alt="${p.nome}" style="width="100%" height="200px">
         <h3>${p.nome}</h3>
         <p>${p.categoria}</p>
-        <a href="${p.link}" target="_blank">Acessar</a>
+        <a class="btn btn-primary" href="${p.link}" target="_blank">Acessar</a>
       </div>
     `;
   });
@@ -92,7 +93,7 @@ carregarProdutos();
 </script>
 
 
-
+<!-- fim de chamar produtos da planilha -->
 
 
 
