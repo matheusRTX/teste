@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicione um novo Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <!-- adicionar produtos na planilha ok -->
+
+    <div id="addProduto">
+        <input name="nome" placeholder="Nome" required>
+        <input name="categoria" placeholder="Categoria" required>
+        <input name="imagem" placeholder="URL da Imagem" required>
+        <input name="link" placeholder="Link do produto" required>
+        <button type="submit">Salvar</button>
+    </div>
+
+    <script>
+       document.getElementById("addProduto").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const dados = {
+    nome: e.target.nome.value,
+    categoria: e.target.categoria.value,
+    imagem: e.target.imagem.value,
+    link: e.target.link.value
+  };
+
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbxp3_eOKNNsHaQq4fBh2u-Ysu0uKYYKf8Lo69JBUq2YlYG8pDBWT_7ynt5CF5v1zEDUcA/exec", {
+      method: "POST",
+      mode: "no-cors", // evita pré-flight / problemas CORS
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    });
+
+    alert("Produto enviado!"); // mesmo que a resposta seja "opaque", o envio ocorrerá
+    e.target.reset();
+
+    // opcional: recarregar a lista (inserir pequena espera para garantir que o dado esteja salvo)
+    setTimeout(carregarProdutos, 800);
+
+  } catch (err) {
+    console.error("Erro ao enviar:", err);
+    alert("Erro ao enviar. Veja console.");
+  }
+});
+
+    </script>
+
+    <!-- fim no codigo para adicionar produtos na tabela -->
+
+
+
+<div id="lista"></div>
+
+<script>
+function handleProdutos(produtos) {
+  const container = document.getElementById("lista");
+  container.innerHTML = ""; // limpa antes
+
+  produtos.forEach(p => {
+    container.innerHTML += `
+      <div class="produto">
+        <img src="${p.imagem}" alt="${p.nome}" style="max-width:200px;">
+        <h3>${p.nome}</h3>
+        <p>${p.categoria}</p>
+        <a href="${p.link}" target="_blank">Acessar</a>
+      </div>
+    `;
+  });
+}
+
+function carregarProdutos() {
+  const url = "https://script.google.com/macros/s/AKfycbxp3_eOKNNsHaQq4fBh2u-Ysu0uKYYKf8Lo69JBUq2YlYG8pDBWT_7ynt5CF5v1zEDUcA/exec"; // substitua com sua /exec
+  const script = document.createElement("script");
+  script.src = url + "?callback=handleProdutos";
+  script.onerror = function() {
+    console.error("Erro carregando JSONP");
+  };
+  document.body.appendChild(script);
+}
+
+// chama ao carregar a página
+carregarProdutos();
+</script>
+
+
+
+
+
+
+</body>
+
+</html>
